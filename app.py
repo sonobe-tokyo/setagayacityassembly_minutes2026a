@@ -55,7 +55,7 @@ target_member = st.sidebar.selectbox(
     index=0  
 )
 
-min_count = st.sidebar.slider("最低共起回数:", min_value=2, max_value=10, value=3)
+min_count = st.sidebar.slider("最低共起回数:", min_value=2, max_value=10, value=4)
 
 # 3. データの絞り込み処理
 df_member = df[df["議員名"] == target_member]
