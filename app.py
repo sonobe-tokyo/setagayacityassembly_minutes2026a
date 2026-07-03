@@ -24,8 +24,8 @@ except Exception as e:
 mpl.rcParams['axes.unicode_minus'] = False
 # ==============================================================================
 
-st.set_page_config(page_title="議員別キーワード共起ネットワーク(2023.06-2026.03)", layout="wide")
-st.title("📊 議員別キーワード共起ネットワーク (2023.06 - 2026.03)")
+st.set_page_config(page_title="議員別キーワードマップ(2023.06-2026.03)", layout="wide")
+st.title("📊 議員別キーワードマップ (2023.06 - 2026.03)")
 
 # 1. データの読み込み
 @st.cache_data
@@ -61,7 +61,7 @@ min_count = st.sidebar.slider("最低共起回数:", min_value=2, max_value=10, 
 df_member = df[df["議員名"] == target_member]
 df_filter = df_member[df_member["共起回数"] >= min_count]
 
-title_label = f"【{target_member} 議員】の共起ネットワーク (2023.06 - 2026.03 / 共起回数 {min_count}回以上)"
+title_label = f"【{target_member} 議員】のキーワードマップ (2023.06 - 2026.03 / 共起回数 {min_count}回以上)"
 
 # 4. 描画処理
 if not df_filter.empty:
