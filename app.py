@@ -37,25 +37,26 @@ df = load_data()
 # 👥 議員リストを五十音順に取得
 raw_members = sorted(df["議員名"].unique())
 
-# ⭐ 【初期表示の設定】開いた瞬間に表示したい議員名を指定
-DEFAULT_MEMBER = "石川ナオミ"
+# ⭐ 【プルダウンの並び替え】石川ナオミを先頭に持ってくる処理
+TOP_MEMBER = "石川ナオミ"
 
-# リスト内から「石川ナオミ」の位置を探し、見つからなければ先頭にする
-if DEFAULT_MEMBER in raw_members:
-    default_index = raw_members.index(DEFAULT_MEMBER)
+if TOP_MEMBER in raw_members:
+    # 一旦リストから石川ナオミを除外する
+    raw_members.remove(TOP_MEMBER)
+    # 先頭に石川ナオミをくっつけた新しいリストを作る
+    members_options = [TOP_MEMBER] + raw_members
 else:
-    default_index = 0
+    members_options = raw_members
 
 # 2. 画面サイドにコントロール（プルダウン・スライダー）を配置
 st.sidebar.header("設定")
 
 target_member = st.sidebar.selectbox(
     "議員名を選んでください:", 
-    options=raw_members, 
-    index=default_index  # 起動時は石川ナオミ議員を初期選択にする
+    options=members_options, 
+    index=0  # 先頭（石川ナオミ）を初期選択にする
 )
 
-# 1人ずつの表示に戻ったため、スライダーの初期値は「3」に固定してスッキリ見せます
 min_count = st.sidebar.slider("最低共起回数:", min_value=2, max_value=10, value=3)
 
 # 3. データの絞り込み処理
